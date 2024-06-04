@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  
+  
+  <head>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+    <link rel="shortcut icon" href="favicon.png" />
+    <title>Refuges du 21</title>
+    <script src="info.js"></script>
+
+    
+    
+    
+    
+    
+  </head>
+  
+  
+  <body style="font-family: arial; overflow-x: visible;">
+                                                                             <!-- liste +  map-->
+    <h2>Donnees de l'API :</h2>
+    <div id="data-container" style="display:none;"></div>
+    
+<select id="departements" onchange="changeDP()">
+  
+  <option value="4.728067,45.611093,6.170198,46.519953">Ain-1</option>
+    <option value="2.958277,48.837212,4.255679,50.069495">Aisne-2</option>
+    <option value="2.276795,45.930733,4.005739,46.804293">Allier-3</option>
+    <option value="5.496793,43.668325,6.969039,44.659999">Alpes-de-Haute-Provence-4</option>
+    <option value="5.418364,44.186442,7.077155,45.126851">Hautes-Alpes-5</option>
+    <option value="6.635412,43.480302,7.718993,44.361155">Alpes Maritimes-6</option>
+    <option value="3.8611,44.264341,4.886471,45.3662">Ardeche-7</option>
+    <option value="4.024463,49.226975,5.394246,50.169162">Ardennes-8</option>
+    <option value="0.825994,42.571489,2.175847,43.316222">Ariege-9</option>
+    <option value="3.383648,47.923696,4.864605,48.716736">Aube-10</option>
+    <option value="1.688426,42.648912,3.240141,43.460066">Aude-11</option>
+    <option value="1.839313,43.690619,3.451754,44.941441">Aveyron-12</option>
+    <option value="4.230207,43.157384,5.813431,43.924136">Bouches-du-Rhone-13</option>
+    <option value="-1.159777,48.751681,0.446477,49.429919">Calvados-14</option>
+    <option value="2.062882,44.615776,3.371465,45.483473">Cantal-15</option>
+    <option value="-0.463103,45.191682,0.947124,46.140851">Charente-16</option>
+    <option value="-1.562669,45.08875,0.005972,46.371485">Charente-Maritime-17</option>
+    <option value="1.773677,46.420477,3.079745,47.629116">Cher-18</option>
+    <option value="1.226502,44.920293,2.528729,45.765272">Correze-19</option>
+    <option value="8.534677,41.333543,9.408043,42.381519">Corse-du-Sud-2A</option>
+    <option value="8.573307,41.832168,9.560096,43.027678">Haute Corse-2B</option>
+    <option value="4.06519,46.899847,5.518767,48.031311">Cote-d'Or-21</option>
+  <option value="-3.665906,48.032568,-1.909064,48.900942">Cotes d'Armor-22</option>
+<option value="1.372604,45.663551,2.611293,46.45537">Creuse-23</option>
+<option value="-0.041877,44.570736,1.448245,45.714769">Dordogne-24</option>
+<option value="5.698682,46.553806,7.062226,47.579707">Doubs-25</option>
+<option value="4.646862,44.115494,5.830446,45.343976">Drome-26</option>
+<option value="0.296725,48.666427,1.803111,49.485283">Eure-27</option>
+<option value="0.755676,47.953818,1.99456,48.941029">Eure-et-Loir-28</option>
+<option value="-5.141292,47.701242,-3.386619,48.7535">Finistere-29</option>
+<option value="3.261869,43.460159,4.845564,44.459664">Gard-30</option>
+<option value="0.441686,42.68933,2.048299,43.921531">Haute Garonne-31</option>
+<option value="-0.282299,43.310868,1.203249,44.080025">Gers-32</option>
+<option value="-1.261424,44.193902,0.315137,45.573636">Gironde-33</option>
+<option value="2.539549,43.21021,4.19454,43.97276">Herault-34</option>
+<option value="-2.289611,47.631614,-1.015621,48.721737">Ille-et-Vilaine-35</option>
+<option value="0.867414,46.346906,2.204572,47.277465">Indre-36</option>
+<option value="0.052737,46.736714,1.366049,47.709868">Indre-et-Loire-37</option>
+<option value="4.742594,44.695873,6.359309,45.883397">Isere-38</option>
+<option value="5.251316,46.260695,6.207189,47.305944">Jura-39</option>
+<option value="-1.523575,43.48743,0.136691,44.532381">Landes-40</option>
+<option value="0.580487,47.186391,2.247891,48.133235">Loir-et-Cher-41</option>
+<option value="-0.794671,47.132505,2.184529,48.004484">Loire-42</option>
+<option value="3.082197,44.743961,4.490819,45.427609">Haute Loire-43</option>
+<option value="-2.559609,46.860073,-0.923216,47.835927">Loire Atlantique-44</option>
+<option value="1.51145,47.483027,3.12841,48.344954">Loiret-45</option>
+<option value="0.981522,44.203348,2.210891,45.046684">Lot-46</option>
+<option value="-0.140673,43.972588,1.078341,44.765678">Lot-et-Garonne-47</option>
+<option value="2.981197,44.109591,3.998366,44.975761">Lozere-48</option>
+<option value="-1.354187,46.968883,0.234549,47.809978">Maine-et-Loire-49</option>
+<option value="-1.954995,48.455797,-0.734817,49.729982">Manche-50</option>
+<option value="3.395865,48.515251,5.039668,49.407828">Marne-51</option>
+<option value="4.626603,47.576566,5.891043,48.689322">Haute-Marne-52</option>
+<option value="-0.650276,48.277844,-0.577747,48.335397">Mayenne-53</option>
+<option value="5.426108,48.348987,7.123213,49.563268">Meurthe-et-Moselle-54</option>
+<option value="4.888377,48.408992,5.854206,49.616864">Meuse-55</option>
+<option value="-3.734915,47.277853,-2.035338,48.210889">Morbihan-56</option>
+<option value="5.891857,48.526723,7.640047,49.515124">Moselle-57</option>
+<option value="2.844891,46.651024,4.23191,47.588288">Nievre-58</option>
+<option value="2.089297,49.969061,4.231678,51.08899">Nord-59</option>
+<option value="1.688866,49.060525,3.166125,49.763922">Oise-60</option>
+<option value="-0.860575,48.179885,0.976576,48.972535">Orne-61</option>
+<option value="1.555598,50.01976,3.188186,51.006774">Pas-de-Calais-62</option>
+<option value="2.388068,45.287071,3.985352,46.256598">Puy-de-Dome-63</option>
+<option value="-1.792325,42.777531,0.029807,43.596725">Pyrenees-Atlantiques-64</option>
+<option value="-0.32716,42.673306,0.646119,43.613334">Hautes-Pyrenees-65</option>
+<option value="1.721635,42.333014,3.177833,42.91854">Pyrenees-Orientales-66</option>
+<option value="6.940614,48.120387,8.233549,49.077858">Bas-Rhin-67</option>
+<option value="6.841026,47.420262,7.622121,48.311198">Haut-Rhin-68</option>
+<option value="4.243647,45.45413,5.160109,46.306502">Rhone-69</option>
+<option value="5.366937,47.252553,6.824947,48.024154">Haute-Saone-70</option>
+<option value="3.622593,46.15607,5.465289,47.155772">Saone-et-Loire-71</option>
+<option value="-0.448063,47.568401,0.916639,48.48502">Sarthe-72</option>
+<option value="5.621902,45.051689,7.185566,45.938537">Savoie-73</option>
+<option value="5.80502,45.681659,7.045065,46.408243">Haute-Savoie-74</option>
+<option value="2.224199,48.815573,2.469921,48.902145">Paris-75</option>
+<option value="0.065572,49.250643,1.790589,50.072097">Seine-Maritime-76</option>
+<option value="2.392326,48.120081,3.559007,49.117898">Seine-et-Marne-77</option>
+<option value="1.44617,48.438557,2.229127,49.085448">Yvelines-78</option>
+<option value="-0.90368,45.969669,0.220405,47.108549">Deux-Sevres-79</option>
+<option value="1.535198,43.382282,2.937474,44.201493">Somme-80</option>
+<option value="1.535198,43.382282,2.937474,44.201493">Tarn-81</option>
+<option value="0.737811,43.76759,2.000898,44.393925">Tarn-et-Garonne-82</option>
+<option value="5.6559,42.981998,6.933462,43.808881">Var-83</option>
+<option value="4.649082,43.658718,5.757335,44.431566">Vaucluse-84</option>
+<option value="-2.400631,46.266539,-0.538134,47.085008">Vendee-85</option>
+<option value="-0.105026,46.048269,1.21323,47.17599">Vienne-86</option>
+<option value="0.62925,45.43663,1.911079,46.401586">Haute-Vienne-87</option>
+<option value="5.393627,47.813298,7.198364,48.513663">Vosges-88</option>
+<option value="2.848432,47.310363,4.340296,48.400061">Yonne-89</option>
+<option value="6.756256,47.433383,7.143381,47.825113">Territoire de Belfort-90</option>
+<option value="1.914513,48.284556,2.585633,48.776132">Essonne-91</option>
+<option value="2.145702,48.729351,2.336941,48.950962">Hauts-de-Seine-92</option>
+<option value="2.288311,48.807248,2.603292,49.012329">Seine-Saint-Denis-93</option>
+<option value="2.308676,48.687643,2.615642,48.861484">Val-de-Marne-94</option>
+<option value="1.608733,48.908675,2.594979,49.241504">Val d'Oise-95</option>
+  <option >----PAYS----</option>
+<option value="5.993680,45.861418,10.509061,47.794082">Suisse</option>
+  <option value="5.738399,49.447392,6.521175,50.185051">Luxembourg</option>
+  <option value="1.406250,42.430957,1.779785,42.661772">Andorre</option>
+  <option value="7.388821,43.717863,7.442722,43.754970">Monaco</option>
+  <option value="9.453426,47.047515,9.648434,47.277349">liechtenstein</option>
+  <option value="54.926147,-21.502689,55.917664,-20.756732">La Reunion</option>
+</select>
+<input type="search" id="search-bar" onkeyup="changedSearch()"/>
+<div id="searchElement">
+    </div>
+
+    <div id="map" style="height: 600px; "></div>
+
+    
+    
+    
+    
+    
+    
+    <script>
+
+    
+      
+      
+      
+      var selectDP = "4.728067,45.611093,6.170198,46.519953";
+          var map;
+       markers = [];
+      
+      
+      
+    
+     //4.06519,46.899847,5.518767,48.031311
+      
+      
+          apiUrl =`https://www.refuges.info/api/bbox?bbox=${selectDP}&type_points=all&nb_points=all`;
+      
+      console.log(apiUrl); 
+        console.log(selectDP);
+      
+      
+      
+      
+     
+      
+      
+      document.addEventListener('DOMContentLoaded', function () {
+         map = L.map('map').setView([47,5], 6);
+                                                                                   //mentions
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        
+                                                                                  //<-recall api
+        
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            if (data.features && Array.isArray(data.features)) {
+              console.log(data);
+              console.log(apiUrl);                                                                       //recall api->                                  
+                                                               //<-markers
+              data.features.forEach(feature => {
+                var popupContent = `${feature.properties.nom}<br><a href="${feature.properties.lien} " target="_blank">lien</a> <br> <form method="post" action="reservation.php"><input type="submit" value="Reserver"/><input type="hidden" value="${feature.properties.nom}" name="nomRefuge"/></form>`;
+                
+                 marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]],{ title: `${feature.properties.nom}` })
+                  .bindPopup(popupContent);
+                marker.addTo(map);
+                
+                markers.push(marker);
+               map.addLayer(marker);
+                
+              });                                                                     
+                       
+                                                                                //markers->
+
+             
+              
+              
+            } else {
+              console.error('Erreur format');
+            }
+          })
+          .catch(error => console.error('Erreur requête API :', error));
+      });
+      
+      
+      
+      
+      
+      
+      
+      //on department change
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      function changeDP(){
+        
+   
+       var selectDP = document.getElementById("departements").value;
+        
+        
+        
+        
+        
+if (map)  {
+   console.log("Map defined");
+  fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            if (data.features && Array.isArray(data.features)) {
+              
+       data.features.forEach(feature => {                // clear layers/markers
+  map.eachLayer((layer) => {
+  if (layer instanceof L.Marker) {
+     layer.remove();
+  }
+});
+
+       });
+  
+              
+       
+              
+              
+              
+              
+  }
+  });
+  
+  
+      
+         apiUrl =`https://www.refuges.info/api/bbox?bbox=${selectDP}&type_points=all&nb_points=all`;                     //Selection Region
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            if (data.features && Array.isArray(data.features)) {
+              console.log(data);
+              console.log(apiUrl);
+              console.log(selectDP);
+              console.log(map);
+              
+            
+  //test
+                                                                                     //<-markers
+              data.features.forEach(feature => {
+               var popupContent = `${feature.properties.nom}<br><a href="${feature.properties.lien} " target="_blank" id="${feature.properties.nom}">lien</a> <br> 
+               <form method="post" action="reservation.php">
+                <input type="submit" value="Reserver"/>
+                <input type="hidden" value="${feature.properties.nom}" name="nomRefuge"/></form>`;
+                
+                 marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]],{ title: `${feature.properties.nom}`})
+                 .bindPopup(popupContent); 
+                
+                markers.push(marker);
+                
+var newLatLng = new L.LatLng(`${feature.geometry.coordinates[1]}`,`${feature.geometry.coordinates[0]}`);
+    marker.setLatLng(newLatLng).update(); 
+                console.log(marker.options.title);
+                console.log(newLatLng);
+                console.log(marker);
+                     marker.addTo(map);
+                     map.addLayer(marker); 
+
+                
+                
+                
+                
+                
+                
+              });     
+              console.log(markers);
+                
+ 
+            } else {
+              console.error('erreur format');
+            }
+          })
+          .catch(error => console.error('Erreur requete API :', error));
+        
+}else{
+  console.error('Map not defined.');
+}
+        
+
+      
+      }
+               function changedSearch() {
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.features && Array.isArray(data.features)) {
+                const searchElement = document.getElementById('searchElement');
+                var searchContent = `
+                    <ul id="UL" >
+                        ${data.features.map(feature => `
+                            <li style="text-decoration: none;">
+                                <a href="#${feature.properties.nom}" id="link-${feature.properties.nom}" onclick="searchLinkClick()">${feature.properties.nom}</a>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+var searchQuery = document.getElementById('search-bar').value;
+    console.log('Search Query:', searchQuery);
+                searchElement.innerHTML = searchContent;
+
+                //variables            search bar list
+                var input, filter, ul, li, i, txtValue;
+                input = document.getElementById('search-bar');
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("UL");
+                li = ul.getElementsByTagName('li');
+
+                //don't match   search query
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    txtValue = a.textContent || a.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+
+                markers.forEach(marker => {
+                    var markerTitle = marker.options.title.toUpperCase();     //search bar marker
+                    var linkElement = document.getElementById(`link-${markerTitle}`);
+
+                    if (markerTitle.indexOf(filter) > -1 || (linkElement && linkElement.textContent.toUpperCase().indexOf(filter) > -1)) {
+             
+                        marker.setOpacity(1);
+                      
+                    } else {
+                        
+                        marker.setOpacity(0.05);
+                      
+                    }
+                });
+            }
+        })
+        .catch(error => console.error('Erreur requete API :', error));
+}
+
+   
+    </script>
+
+    
+    
+    
+    
+    
+    
+    
+    <br><br>
+    
+  </body>
+</html>
