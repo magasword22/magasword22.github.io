@@ -190,7 +190,7 @@ window.addEventListener('load', function() {
               console.log(apiUrl);                                                                       //recall api->                                  
                                                                //<-markers
               data.features.forEach(feature => {
-                var popupContent = `${feature.properties.nom}<br><a href="${feature.properties.lien} " target="_blank">lien</a> <br> <form method="get" action="reservation.php"><input type="submit" value="Reserver"/><input type="hidden" value="${feature.properties.nom}" name="nomRefuge"/></form>`;
+                var popupContent = `${feature.properties.nom}<br><a href="${feature.properties.lien} " target="_blank">lien</a> <br> <form method="post" action="reservation.php"><input type="submit" value="Reserver"/><input type="hidden" value="${feature.properties.nom}" name="nomRefuge"/></form>`;
                 
                  marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]],{ title: `${feature.properties.nom}` })
                   .bindPopup(popupContent);
