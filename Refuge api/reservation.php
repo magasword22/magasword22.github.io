@@ -5,7 +5,7 @@
 
 
 <body>
- <h2> Formulaire de reservation de </h2><?php echo htmlspecialchars($_POST['nomRefuge']);?> 
+ <h2> Formulaire de reservation de </h2><?php echo htmlspecialchars($_GET['nomRefuge']);?> 
   
   <form method="post" action="confirmation.php">
    <input type="hidden" name="refuge" value="<?php echo htmlspecialchars($_POST['nomRefuge']);?>">
